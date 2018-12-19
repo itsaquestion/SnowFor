@@ -15,6 +15,8 @@ snowFor(x, FUN, pre_fun = NULL, cores = parallel::detectCores(),
 \item{pre_fun}{预备函数，用于初始化每个节点}
 
 \item{cores}{现成数量，默认为全部逻辑核心数}
+
+\item{env}{存放cl对象的环境，默认为globalenv()}
 }
 \description{
 用法等同于lapply。但出错不会中断，会返回一个ThreadError对象。

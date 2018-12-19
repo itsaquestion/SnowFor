@@ -15,7 +15,7 @@ ThreadError = function(e,i) {
 }
 
 #' @export
-print.ThreadError = function(x) {
+print.ThreadError = function(x, ...) {
   cat("Thread Error: Pid:", x$pid,"\n\ti =",x$i,"; Error Message:", x$error$message)
 }
 
