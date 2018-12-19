@@ -5,6 +5,7 @@
 #' @param x 一个list，传给foreach的第一个参数
 #' @param FUN 要运行的函数
 #' @param pre_fun 预备函数，用于初始化每个节点
+#' @param varlist 要传递给节点的objects名称字符串："a_variable"
 #' @param cores 现成数量，默认为全部逻辑核心数
 #' @param env 存放cl对象的环境，默认为globalenv()
 #' @return
@@ -25,6 +26,7 @@
 snowFor = function(x,
                    FUN,
                    pre_fun = NULL,
+                   varlist = NULL,
                    cores = parallel::detectCores(),
                    env = globalenv()) {
 
@@ -43,9 +45,14 @@ snowFor = function(x,
 
   cat("done.\n")
 
-  if (!is.null(pre_fun)) {
+  if (!is.null(pre_fun) | !is.null(varlist)) {
     cat("Perparing nodes ... ")
-    clusterCall(env$.snowfor_cl, pre_fun)
+    if(!is.null(pre_fun)){
+      clusterCall(env$.snowfor_cl, pre_fun)
+    }
+    if(!is.null(varlist)){
+      clusterExport(env$.snowfor_cl, varlist)
+    }
     cat("done.\n")
   }
 

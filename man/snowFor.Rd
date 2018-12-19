@@ -4,8 +4,8 @@
 \alias{snowFor}
 \title{snowFor 利用snow和foreach的多线程map函数}
 \usage{
-snowFor(x, FUN, pre_fun = NULL, cores = parallel::detectCores(),
-  env = globalenv())
+snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
+  cores = parallel::detectCores(), env = globalenv())
 }
 \arguments{
 \item{x}{一个list，传给foreach的第一个参数}
@@ -13,6 +13,8 @@ snowFor(x, FUN, pre_fun = NULL, cores = parallel::detectCores(),
 \item{FUN}{要运行的函数}
 
 \item{pre_fun}{预备函数，用于初始化每个节点}
+
+\item{varlist}{要传递给节点的objects名称字符串："a_variable"}
 
 \item{cores}{现成数量，默认为全部逻辑核心数}
 
