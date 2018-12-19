@@ -4,7 +4,7 @@
 \alias{chunkSnowFor}
 \title{chunkSnowFor a wrapper for snowFor(), but split by chunk_size first.}
 \usage{
-chunkSnowFor(x, FUN, chunk_size, ...)
+chunkSnowFor(x, FUN, chunk_size, deley_sec = 0, ...)
 }
 \arguments{
 \item{x}{list to loop}
@@ -12,6 +12,8 @@ chunkSnowFor(x, FUN, chunk_size, ...)
 \item{FUN}{the function for mapping}
 
 \item{chunk_size}{size of *every* chunk.}
+
+\item{deley_sec}{sleep for some time between chunks (in seconds)}
 
 \item{...}{params here will pass to snowFor()}
 }

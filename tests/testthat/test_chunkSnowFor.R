@@ -6,7 +6,7 @@ test_that("Basic usage", {
   a_list = 1:16
 
   go_fun = function(x) {
-    Sys.sleep(1)
+    Sys.sleep(0.5)
     c(x,x)
   }
 
@@ -21,3 +21,20 @@ test_that("Basic usage", {
   expect_true(all.equal(a,b))
 
 })
+
+
+
+test_that("Sleep", {
+  a_list = 1:16
+
+  go_fun = function(x) {
+    Sys.sleep(0.5)
+    c(x,x)
+  }
+
+  a = SnowFor::chunkSnowFor(a_list, go_fun , chunk_size = 4, deley_sec = 5, cores = 2 )
+
+
+})
+
+
