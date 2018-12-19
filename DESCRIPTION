@@ -1,0 +1,12 @@
+Package: SnowFor
+Type: Package
+Title: 利用snow和foreach的多线程map函数
+Version: 0.1.0
+Author: Li Weicheng
+Maintainer: Li Weicheng <yourself@somewhere.net>
+Description: 利用snow和foreach的多线程map函数
+License: GPL 3.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: testthat
