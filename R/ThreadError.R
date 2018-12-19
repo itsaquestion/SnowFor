@@ -1,27 +1,30 @@
-#' ThreadError 多线程出错所返回的对象
+#' ThreadError Error object for a thread
 #'
 #' @param e error
-#' @param i 出错时snowFor的第一个参数
+#' @param param the loop parameter when the error happen
 #'
 #' @return
 #' @export
 #' @RCurl
 #'
 #' @examples
-ThreadError = function(e,i) {
-  ret = list(pid = Sys.getpid(), error = e,i = i)
+ThreadError = function(e, param) {
+  ret = list(pid = Sys.getpid(), error = e, param = param)
   class(ret) = "ThreadError"
   ret
 }
 
 #' @export
 print.ThreadError = function(x, ...) {
-  cat("Thread Error: Pid:", x$pid,"\n\ti =",x$i,"; Error Message:", x$error$message)
+  cat("Thread Error:" ,
+      "\n** Pid:", x$pid,
+      "\n** Message:", x$error$message,
+      "\n** Param: <Check ThreadError$param>\n")
 }
 
-#' getErrors 从snwoFor的结果中选出ThreadError的结果
+#' getErrors filter error ThreadError from result of snowFor()
 #'
-#' @param x snwoFor的返回
+#' @param x return of snwoFor()
 #'
 #' @return
 #' @export

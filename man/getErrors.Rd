@@ -2,13 +2,13 @@
 % Please edit documentation in R/ThreadError.R
 \name{getErrors}
 \alias{getErrors}
-\title{getErrors 从snwoFor的结果中选出ThreadError的结果}
+\title{getErrors filter error ThreadError from result of snowFor()}
 \usage{
 getErrors(x)
 }
 \arguments{
-\item{x}{snwoFor的返回}
+\item{x}{return of snwoFor()}
 }
 \description{
-getErrors 从snwoFor的结果中选出ThreadError的结果
+getErrors filter error ThreadError from result of snowFor()
 }

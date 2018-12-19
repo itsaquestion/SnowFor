@@ -1,10 +1,10 @@
 Package: SnowFor
 Type: Package
-Title: 利用snow和foreach的多线程map函数
-Version: 0.3.0
+Title: multithreading map-like function based on snow and foreach
+Version: 0.3.1
 Author: Li Weicheng
 Maintainer: Li Weicheng <yourself@somewhere.net>
-Description: 利用snow和foreach的多线程map函数。
+Description: multithreading map-like function based on snow and foreach
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

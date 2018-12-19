@@ -2,15 +2,15 @@
 % Please edit documentation in R/ThreadError.R
 \name{ThreadError}
 \alias{ThreadError}
-\title{ThreadError 多线程出错所返回的对象}
+\title{ThreadError Error object for a thread}
 \usage{
-ThreadError(e, i)
+ThreadError(e, param)
 }
 \arguments{
 \item{e}{error}
 
-\item{i}{出错时snowFor的第一个参数}
+\item{param}{the loop parameter when the error happen}
 }
 \description{
-ThreadError 多线程出错所返回的对象
+ThreadError Error object for a thread
 }

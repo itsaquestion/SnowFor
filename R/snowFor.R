@@ -1,13 +1,14 @@
-#' snowFor 利用snow和foreach的多线程map函数
+#' snowFor multithreading map-like function based on snow and foreach
 #'
-#' 用法等同于lapply。但出错不会中断，会返回一个ThreadError对象。
+#' Errors won't break the loop.
+#' Instead the loop will return an ThreadError object and keep going.
 #'
-#' @param x 一个list，传给foreach的第一个参数
-#' @param FUN 要运行的函数
-#' @param pre_fun 预备函数，用于初始化每个节点
-#' @param varlist 要传递给节点的objects名称字符串："a_variable"
-#' @param cores 现成数量，默认为全部逻辑核心数
-#' @param env 存放cl对象的环境，默认为globalenv()
+#' @param x list to loop
+#' @param FUN the function for mapping
+#' @param pre_fun prepare function to init all nodes
+#' @param varlist name string vector of objects to be exported to nodes: "a_variable"
+#' @param cores number of threads
+#' @param env env to store the cl object. defalut: globalenv()
 #' @return
 #' @export
 #' @import snow
