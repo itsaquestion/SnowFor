@@ -25,15 +25,17 @@ test_that("Basic usage", {
 
 
 test_that("Sleep", {
-  a_list = 1:16
+  a_list = 1:4
 
   go_fun = function(x) {
-    Sys.sleep(0.5)
     c(x,x)
   }
 
-  a = SnowFor::chunkSnowFor(a_list, go_fun , chunk_size = 4, deley_sec = 5, cores = 2 )
+  tt = system.time({
+    a = SnowFor::chunkSnowFor(a_list, go_fun , chunk_size = 2, deley_sec = 5, cores = 2 )
+  })
 
+  expect_true(tt['elapsed'] > 5)
 
 })
 

@@ -5,7 +5,6 @@
 #'
 #' @return
 #' @export
-#' @RCurl
 #'
 #' @examples
 ThreadError = function(e, param) {
