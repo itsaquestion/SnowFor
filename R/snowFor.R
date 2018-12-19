@@ -49,7 +49,7 @@ snowFor = function(x,
     cat("done.\n")
   }
 
-  pb <- txtProgressBar(max = length(x), style = 3)
+  pb <- txtProgressBarETA(max = length(x))
   progress <- function(n) setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
 

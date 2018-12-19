@@ -11,4 +11,3 @@ test_that("Basic usage", {
   expect_equal(unlist(a), c(1,2,3,4,5,6))
 })
 
-
