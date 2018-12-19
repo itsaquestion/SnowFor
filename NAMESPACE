@@ -2,6 +2,7 @@
 
 S3method(print,ThreadError)
 export(ThreadError)
+export(chunkSnowFor)
 export(getErrors)
 export(snowFor)
 import(doSNOW)
