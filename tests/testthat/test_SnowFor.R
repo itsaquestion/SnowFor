@@ -1,5 +1,4 @@
 context("Basic usage")
-library(SnowFor)
 
 go_fun = function(x){
   Sys.sleep(1)
@@ -19,7 +18,7 @@ test_that("export", {
   go_fun = function(x){
     some_value * x
   }
-  a = SnowFor::snowFor(1:6, function(x){
+  a = snowFor(1:6, function(x){
     #if(x == 3){stop("adsf")}
     some_value * x
   },varlist = c("some_value"),cores = 2)
@@ -31,7 +30,7 @@ test_that("export", {
 test_that("errors", {
   some_value = 123
   expect_warning({
-    a = SnowFor::snowFor(1:6, function(x){
+    a = snowFor(1:6, function(x){
       if(x == 3){stop("adsf")}
       some_value * x
     },varlist = c("some_value"),cores = 2)

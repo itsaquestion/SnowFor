@@ -23,7 +23,10 @@ chunkSnowFor = function(x,FUN,chunk_size, deley_sec = 0, ...) {
       Sys.sleep(deley_sec)
     }
 
+    tt = strftime(Sys.time(),"%Y-%m-%d %H:%M:%S")
+
     cat("\n-------------------------------")
+    cat("\n*",tt)
     cat("\n* Chunks", c, "/", n, "=", round(c * 100 / n, 2), "%")
     cat("\n-------------------------------\n")
     snowFor(a_chunk,FUN,...)

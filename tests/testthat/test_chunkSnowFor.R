@@ -10,9 +10,9 @@ test_that("Basic usage", {
     c(x,x)
   }
 
-  a = SnowFor::chunkSnowFor(a_list, go_fun , chunk_size = 4, cores = 2 )
+  a = chunkSnowFor(a_list, go_fun , chunk_size = 4, cores = 2 )
 
-  b = SnowFor::snowFor(a_list, go_fun, cores = 2)
+  b = snowFor(a_list, go_fun, cores = 2)
 
   cat("a\n")
   print(unlist(a))
@@ -32,7 +32,7 @@ test_that("Sleep", {
   }
 
   tt = system.time({
-    a = SnowFor::chunkSnowFor(a_list, go_fun , chunk_size = 2, deley_sec = 5, cores = 2 )
+    a = chunkSnowFor(a_list, go_fun , chunk_size = 2, deley_sec = 5, cores = 2 )
   })
 
   expect_true(tt['elapsed'] > 5)
