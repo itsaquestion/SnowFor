@@ -9,12 +9,15 @@
 #' @param varlist name string vector of objects to be exported to nodes: "a_variable"
 #' @param cores number of threads
 #' @param env env to store the cl object. defalut: globalenv()
+#' @param er an EasyRedis object. (eg: er = EasyRedis::ErInit())
+#' @param er_key redis key to store info
 #' @return
 #' @export
 #' @import snow
 #' @import tcltk
 #' @import doSNOW
 #' @import foreach
+#' @import EasyRedis
 #'
 #' @examples
 #' go_fun = function(x){
@@ -29,7 +32,9 @@ snowFor = function(x,
                    pre_fun = NULL,
                    varlist = NULL,
                    cores = parallel::detectCores(),
-                   env = globalenv()) {
+                   env = globalenv(),
+                   er = NULL,
+                   er_key = "SnowFor") {
 
 
   tryCatch(
@@ -58,8 +63,18 @@ snowFor = function(x,
   }
 
   pb <- txtProgressBarETA(max = length(x))
-  progress <- function(n) setTxtProgressBar(pb, n)
-  opts <- list(progress = progress)
+
+  makeProgress = function(total_size){
+    progress <- function(n) {
+      if(!is.null(er)){
+        er$set(er_key,list(time = Sys.time(),n=n,p=n/total_size,done=F))
+      }
+      setTxtProgressBar(pb, n)
+    }
+    progress
+  }
+
+  opts <- list(progress = makeProgress(length(x)))
 
 
   ret = vector(mode = "list", length = length(x))
@@ -74,6 +89,13 @@ snowFor = function(x,
       )
     }
   })
+
+  if(!is.null(er)){
+    info= er$get(er_key)
+    info$done = T
+    er$set(er_key,info)
+  }
+
   cat("\n")
   print(tt)
 

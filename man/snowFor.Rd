@@ -5,7 +5,8 @@
 \title{snowFor multithreading map-like function based on snow and foreach}
 \usage{
 snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
-  cores = parallel::detectCores(), env = globalenv())
+  cores = parallel::detectCores(), env = globalenv(), er = NULL,
+  er_key = "SnowFor")
 }
 \arguments{
 \item{x}{list to loop}
@@ -19,6 +20,10 @@ snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
 \item{cores}{number of threads}
 
 \item{env}{env to store the cl object. defalut: globalenv()}
+
+\item{er}{an EasyRedis object. (eg: er = EasyRedis::ErInit())}
+
+\item{er_key}{redis key to store info}
 }
 \description{
 Errors won't break the loop.

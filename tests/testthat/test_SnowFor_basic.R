@@ -1,4 +1,4 @@
-context("Basic usage")
+context("SnowFor_Base")
 
 go_fun = function(x){
   Sys.sleep(1)
