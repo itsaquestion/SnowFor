@@ -13,9 +13,9 @@ test_that("redis_base", {
     print(x)
     x
   }
-  a = snowFor(1:10, go_fun,cores = 2,er=er,er_key = the_key)
+  a = snowFor(1:100, go_fun,cores = 2,er=er,er_key = the_key)
 
-  expect_equal(unlist(a), 1:10)
+  expect_equal(unlist(a), 1:100)
   expect_true(the_key %in% er$keys())
   #er$del(the_key,F)
 })
