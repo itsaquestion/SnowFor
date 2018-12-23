@@ -10,7 +10,7 @@
 #' @param cores number of threads
 #' @param env env to store the cl object. defalut: globalenv()
 #' @param er an EasyRedis object. (eg: er = EasyRedis::ErInit())
-#' @param er_key redis key to store info
+#' @param do_clean if er != NULL and do_clean = T, then clean SnowFor information in Redis.
 #' @return
 #' @export
 #' @import snow
@@ -34,13 +34,18 @@ snowFor = function(x,
                    cores = parallel::detectCores(),
                    env = globalenv(),
                    er = NULL,
-                   er_key = "SnowFor") {
+                   do_clean = T) {
 
 
   tryCatch(
     stopCluster(env$.snowfor_cl),
     error = function(e) e
   )
+
+
+  if(!is.null(er) & do_clean){
+    cleanSnow(er)
+  }
 
   cores = min(cores,length(x))
 
@@ -67,7 +72,7 @@ snowFor = function(x,
   makeProgress = function(total_size){
     progress <- function(n) {
       if(!is.null(er)){
-        er$set(er_key,list(time = Sys.time(),n=n,p=n/total_size,done=F))
+        updateChunkInfo(er,list(time = Sys.time(),n=n,p=n/total_size))
       }
       setTxtProgressBar(pb, n)
     }
@@ -91,9 +96,7 @@ snowFor = function(x,
   })
 
   if(!is.null(er)){
-    info= er$get(er_key)
-    info$done = T
-    er$set(er_key,info)
+    delChunkInfo(er)
   }
 
   cat("\n")
@@ -105,3 +108,23 @@ snowFor = function(x,
 
   ret
 }
+
+
+updateChunkInfo = function(er,info,er_key = "SnowFor_chunk"){
+  er$set(er_key,info)
+}
+
+delChunkInfo = function(er,er_key = "SnowFor_chunk"){
+  er$del("SnowFor_chunk",ask = F)
+}
+
+cleanSnow = function(er){
+  all_keys = er$keys()
+  all_keys = all_keys[startsWith(all_keys,"SnowFor_")]
+  if(length(all_keys)>0){
+    er$del(all_keys,F)
+  }
+}
+
+
+

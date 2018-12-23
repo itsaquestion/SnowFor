@@ -6,7 +6,7 @@
 \usage{
 snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
   cores = parallel::detectCores(), env = globalenv(), er = NULL,
-  er_key = "SnowFor")
+  do_clean = T)
 }
 \arguments{
 \item{x}{list to loop}
@@ -23,7 +23,7 @@ snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
 
 \item{er}{an EasyRedis object. (eg: er = EasyRedis::ErInit())}
 
-\item{er_key}{redis key to store info}
+\item{do_clean}{if er != NULL and do_clean = T, then clean SnowFor information in Redis.}
 }
 \description{
 Errors won't break the loop.

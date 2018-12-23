@@ -11,6 +11,13 @@
 #'
 #' @examples
 chunkSnowFor = function(x,FUN,chunk_size, deley_sec = 0, ...) {
+  er = EasyRedis::ErInit()
+
+  cleanSnow(er)
+
+  er$set("SnowFor_total",length(x))
+  er$set("SnowFor_acc",0)
+
   x_split = split(x, ceiling(seq_along(x) / chunk_size))
 
   n = length(x_split)
@@ -29,8 +36,16 @@ chunkSnowFor = function(x,FUN,chunk_size, deley_sec = 0, ...) {
     cat("\n*",tt)
     cat("\n* Chunks", c, "/", n, "=", round(c * 100 / n, 2), "%")
     cat("\n-------------------------------\n")
-    snowFor(a_chunk,FUN,...)
+    ret = snowFor(a_chunk,FUN,do_clean = F, ...)
+
+    acc = er$get("SnowFor_acc")
+    er$set("SnowFor_chunk",list(time = Sys.time(),n=0,p=0))
+    er$set("SnowFor_acc",acc + length(ret))
+
+    ret
   }), recursive = FALSE)
   names(ret) = NULL
+
+  cleanSnow(er)
   ret
 }
