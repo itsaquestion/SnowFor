@@ -16,7 +16,6 @@ test_that("Basic usage", {
 
 
 
-
 some_value = 123
 go_fun = function(x){
   some_value * x
@@ -43,4 +42,6 @@ test_that("errors", {
 
   expect_equal(class(a[[3]]), "ThreadError")
 })
+
+
 

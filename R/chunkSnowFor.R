@@ -10,7 +10,13 @@
 #' @export
 #'
 #' @examples
-chunkSnowFor = function(x,FUN,chunk_size, deley_sec = 0, ...) {
+chunkSnowFor = function(x, FUN, chunk_size, deley_sec = 0, ...) {
+
+  if (is.data.frame(x)) {
+    x = split(x, seq(nrow(x)))
+  }
+
+
   er = EasyRedis::ErInit()
 
   cleanSnow(er)

@@ -9,7 +9,7 @@ snowFor(x, FUN, pre_fun = NULL, varlist = NULL,
   do_clean = T)
 }
 \arguments{
-\item{x}{list to loop}
+\item{x}{list to loop. Accept vector, list and data.frame(by row)}
 
 \item{FUN}{the function for mapping}
 

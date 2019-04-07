@@ -40,3 +40,18 @@ test_that("Sleep", {
 })
 
 
+test_that("chunkSnowFor: data.frame", {
+
+  params = data.frame(a = 1:10, b = 2:11)
+
+  go_fun_2 = function(x) {
+    x$a + x$b
+  }
+
+  a = snowFor(params, go_fun_2, cores = 2)
+
+  b = chunkSnowFor(params, go_fun_2, chunk_size = 4, cores = 2)
+
+  expect_true(all.equal(a, b))
+
+})

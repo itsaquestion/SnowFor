@@ -1,7 +1,7 @@
 Package: SnowFor
 Type: Package
 Title: multithreading map-like function based on snow and foreach
-Version: 0.6.0
+Version: 0.6.1
 Author: Li Weicheng
 Maintainer: Li Weicheng <yourself@somewhere.net>
 Description: multithreading map-like function based on snow and foreach

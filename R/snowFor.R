@@ -3,7 +3,7 @@
 #' Errors won't break the loop.
 #' Instead the loop will return an ThreadError object and keep going.
 #'
-#' @param x list to loop
+#' @param x list to loop. Accept vector, list and data.frame(by row)
 #' @param FUN the function for mapping
 #' @param pre_fun prepare function to init all nodes
 #' @param varlist name string vector of objects to be exported to nodes: "a_variable"
@@ -36,6 +36,10 @@ snowFor = function(x,
                    er = NULL,
                    do_clean = T) {
 
+  
+  if (is.data.frame(x)) {
+    x = split(x, seq(nrow(x)))
+  }
 
   tryCatch(
     stopCluster(env$.snowfor_cl),
